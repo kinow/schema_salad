@@ -26,10 +26,14 @@ class EggInfoFromGit(egg_info):
         return time.strftime('.%Y%m%d%H%M%S', time.gmtime(int(gitinfo)))
 
     def tags(self):
+        print('##### BRUNO')
+        print(self.tag_build)
         if self.tag_build is None:
             try:
                 self.tag_build = self.git_timestamp_tag()
-            except subprocess.CalledProcessError:
+            except subprocess.CalledProcessError as e:
+                print('##### BRUNO')
+                print(e)
                 pass
         return egg_info.tags(self)
 
