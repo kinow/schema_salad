@@ -16,9 +16,7 @@ jobs:
       uses: RalfG/python-wheels-manylinux-build@v0.3.4-manylinux2010_x86_64
       with:
         python-versions: 'cp38-cp38'
-        pre-build-command: |
-          source .github/workflows/wheel-prep.sh
-          pip list
+        pre-build-command: source .github/workflows/wheel-prep.sh
         build-requirements: -rrequirements.txt -rmypy-requirements.txt
     - name: Move audited wheels to new directory
       run: mkdir audited_wheels && cp dist/*-manylinux*.whl audited_wheels/
