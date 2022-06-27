@@ -12,6 +12,9 @@ RECENT_SETUPTOOLS = int(SETUPTOOLS_VER[0]) > 40 or (
         int(SETUPTOOLS_VER[0]) == 40 and int(SETUPTOOLS_VER[1]) == 0 and
         int(SETUPTOOLS_VER[2]) > 0)
 
+print('##### BRUNO')
+print(RECENT_SETUPTOOLS)
+
 class EggInfoFromGit(egg_info):
     """Tag the build with git commit timestamp.
 
@@ -20,12 +23,14 @@ class EggInfoFromGit(egg_info):
     """
 
     def git_timestamp_tag(self):
+        print('--- git_timestamp_tag')
         gitinfo = subprocess.check_output(
             ['git', 'log', '--first-parent', '--max-count=1',
              '--format=format:%ct', '.']).strip()
         return time.strftime('.%Y%m%d%H%M%S', time.gmtime(int(gitinfo)))
 
     def tags(self):
+        print('--- tags')
         print('##### BRUNO')
         print(self.tag_build)
         if self.tag_build is None:
@@ -38,4 +43,5 @@ class EggInfoFromGit(egg_info):
         return egg_info.tags(self)
 
     if RECENT_SETUPTOOLS:
+        print('--- RECENT_SETUPTOOLS')
         vtags = property(tags)
