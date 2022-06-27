@@ -14,6 +14,8 @@ try:
     import gittaggers
 
     tagger = gittaggers.EggInfoFromGit
+    print('##### BRUNO')
+    print("TAGGER OK!")
 except ImportError as e:
     print('##### BRUNO')
     print(e)
