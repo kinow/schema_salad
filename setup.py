@@ -14,7 +14,11 @@ try:
     import gittaggers
 
     tagger = gittaggers.EggInfoFromGit
-except ImportError:
+    print('##### BRUNO')
+    print("TAGGER OK!")
+except ImportError as e:
+    print('##### BRUNO')
+    print(e)
     tagger = egg_info_cmd.egg_info
 
 needs_pytest = {"pytest", "test", "ptr"}.intersection(sys.argv)

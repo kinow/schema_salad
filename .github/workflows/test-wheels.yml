@@ -1,0 +1,22 @@
+name: Python package build and publish
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # slow, but gets all the tags
+    - name: Build manylinux2010 Python wheels
+      uses: RalfG/python-wheels-manylinux-build@v0.3.4-manylinux2010_x86_64
+      with:
+        python-versions: 'cp38-cp38'
+        pre-build-command: source .github/workflows/wheel-prep.sh
+        build-requirements: -vvv -rrequirements.txt -rmypy-requirements.txt
+    - name: Move audited wheels to new directory
+      run: mkdir audited_wheels && cp dist/*-manylinux*.whl audited_wheels/
