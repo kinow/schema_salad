@@ -17,6 +17,6 @@ jobs:
       with:
         python-versions: 'cp38-cp38'
         pre-build-command: source .github/workflows/wheel-prep.sh
-        build-requirements: -rrequirements.txt -rmypy-requirements.txt
+        build-requirements: -vvv -rrequirements.txt -rmypy-requirements.txt
     - name: Move audited wheels to new directory
       run: mkdir audited_wheels && cp dist/*-manylinux*.whl audited_wheels/
